@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 19:02:16 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/05 19:37:56 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/05 19:45:48 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	conf_to_map(t_map *map, char **conf)
 	err = 0;
 	i = 0;
 	map->height = get_split_size(conf);
-	map->map = (int **)ft_calloc(map->height, sizeof(int *));
+	map->map = (int **)ft_calloc(map->height + 1, sizeof(int *));
 	while (conf[i] && err >= 0)
 	{
 		if (ft_strlen(conf[i]) > 0)
@@ -50,7 +50,7 @@ int	conf_to_map(t_map *map, char **conf)
 				err = -2;
 				break ;
 			}
-			map->map[i] = (int *)ft_calloc(map->width, sizeof(int));
+			map->map[i] = (int *)ft_calloc(map->width + 1, sizeof(int));
 			j = 0;
 			while (values[j])
 			{
