@@ -6,7 +6,7 @@
 #    By: fbes <fbes@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/04/21 20:02:11 by fbes          #+#    #+#                  #
-#    Updated: 2021/11/05 21:59:50 by fbes          ########   odam.nl          #
+#    Updated: 2021/11/05 23:22:33 by fbes          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ CFLAGS =	-fsanitize=address
 
 all: $(NAME)
 
-$(NAME): $(OBJS) lib/libft/libft.a libmlx.dylib
+$(NAME): $(OBJS) includes/fdf.h lib/libft/libft.a libmlx.dylib
 	$(CC) $(CFLAGS) $(INCLUDES) $(SRCS) \
 	lib/libft/libft.a libmlx.dylib -o $(NAME)
 

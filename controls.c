@@ -6,13 +6,13 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 21:52:32 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/05 22:50:41 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/05 23:23:40 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 #include "fdf.h"
-# include <stdio.h>
+#include <stdio.h>
 
 void	reset_key_presses(t_keys_status *key_status)
 {
@@ -69,18 +69,23 @@ int	keyrelease(int keycode, t_fdf *fdf)
 	return (1);
 }
 
-int	mousebtnpress(int btncode, int x, int y, t_fdf *fdf)
+int	mousebtnpress(int btn_code, int x, int y, t_fdf *fdf)
 {
 	x = y;
-	if (btncode == BTN_SCROLL_UP)
+
+	if (btn_code == BTN_MOUSE_L)
+		fdf->map->translate_h += 0.05;
+	else if (btn_code == BTN_MOUSE_R)
+		fdf->map->translate_h -= 0.05;
+	else if (btn_code == BTN_SCROLL_UP)
 	{
 		fdf->map->tile_size += 1;
-		fdf->mlx->offset.x -= 12;
+		fdf->mlx->offset.x -= fdf->map->tile_size;
 	}
-	else if (btncode == BTN_SCROLL_DOWN)
+	else if (btn_code == BTN_SCROLL_DOWN)
 	{
 		fdf->map->tile_size -= 1;
-		fdf->mlx->offset.x += 12;
+		fdf->mlx->offset.x += fdf->map->tile_size;
 	}
 	if (fdf->map->tile_size <= 0)
 		fdf->map->tile_size = 1;

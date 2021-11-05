@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 16:26:00 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/05 22:15:14 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/05 23:23:11 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,18 @@
 # define FDF_H
 
 # define DEFAULT_COLOR 0x00FFFFFF
-# define DEFAULT_TILE_SIZE 12
-# define RES_WIDTH 480
-# define RES_HEIGHT 360
+# define DEFAULT_TILE_SIZE_FACTOR 30
+# define DEFAULT_TRANSLATE_H 0.5
+# define RES_WIDTH 800
+# define RES_HEIGHT 500
 
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
 # define KEY_DOWN 125
 # define KEY_UP 126
 # define KEY_ESC 53
+# define BTN_MOUSE_L 1
+# define BTN_MOUSE_R 2
 # define BTN_SCROLL_UP 4
 # define BTN_SCROLL_DOWN 5
 
@@ -55,6 +58,7 @@ typedef struct s_map
 {
 	unsigned int	default_color;
 	int				tile_size;
+	double			translate_h;
 	int				**map;
 	t_coords		**iso_map;
 	unsigned int	**colors;
