@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 16:43:17 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/05 19:04:52 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/05 22:14:41 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_map	*init_map(void)
 	map->map = NULL;
 	map->colors = NULL;
 	map->default_color = DEFAULT_COLOR;
+	map->tile_size = DEFAULT_TILE_SIZE;
 	map->width = 0;
 	map->height = 0;
 	return (map);

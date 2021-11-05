@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 18:50:45 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/05 21:48:57 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/05 22:10:22 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,17 @@ void	put_pixel(t_mlx_ctx *mlx, int h, int w, unsigned int c)
 	*(unsigned int *)dst = mlx_get_color_value(mlx->core, c);
 }
 
+static void	clear_img(t_mlx_ctx *mlx)
+{
+	ft_bzero(mlx->img.address, mlx->res_h * mlx->img.line_size);
+}
+
 int	draw_next_frame(t_fdf *fdf)
 {
+	handle_key_presses(fdf);
+	clear_img(fdf->mlx);
 	render_next_frame(fdf);
 	mlx_put_image_to_window(fdf->mlx->core, fdf->mlx->win,
 		fdf->mlx->img.img_ptr, 0, 0);
-	mlx_do_sync(fdf->mlx->core);
 	return (1);
 }

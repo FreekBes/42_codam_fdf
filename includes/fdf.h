@@ -6,16 +6,25 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 16:26:00 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/05 21:41:58 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/05 22:15:14 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# define DEFAULT_COLOR 0xFFFFFF
+# define DEFAULT_COLOR 0x00FFFFFF
+# define DEFAULT_TILE_SIZE 12
 # define RES_WIDTH 480
 # define RES_HEIGHT 360
+
+# define KEY_LEFT 123
+# define KEY_RIGHT 124
+# define KEY_DOWN 125
+# define KEY_UP 126
+# define KEY_ESC 53
+# define BTN_SCROLL_UP 4
+# define BTN_SCROLL_DOWN 5
 
 typedef struct s_coords
 {
@@ -45,6 +54,7 @@ typedef struct s_mlx_ctx
 typedef struct s_map
 {
 	unsigned int	default_color;
+	int				tile_size;
 	int				**map;
 	t_coords		**iso_map;
 	unsigned int	**colors;
@@ -52,8 +62,17 @@ typedef struct s_map
 	int				height;
 }					t_map;
 
+typedef struct s_keys_status
+{
+	int				left;
+	int				right;
+	int				up;
+	int				down;
+}					t_keys_status;
+
 typedef struct s_fdf
 {
+	t_keys_status	key_stat;
 	t_mlx_ctx		*mlx;
 	t_map			*map;
 }					t_fdf;
@@ -75,8 +94,14 @@ int					extension_valid(char *file_name, char *ext);
 void				print_map(t_map *map);
 void				render_next_frame(t_fdf *fdf);
 void				put_pixel(t_mlx_ctx *mlx, int h, int w, unsigned int c);
-void				draw_line(t_mlx_ctx *mlx, t_coords start, t_coords end, unsigned int c);
+void				draw_line(t_mlx_ctx *mlx, t_coords start, t_coords end,
+						unsigned int c);
 void				cart_to_iso(const t_coords *cart, t_coords *iso);
 void				iso_to_cart(const t_coords *iso, t_coords *cart);
+void				reset_key_presses(t_keys_status *key_status);
+void				handle_key_presses(t_fdf *fdf);
+int					keypress(int keycode, t_fdf *fdf);
+int					keyrelease(int keycode, t_fdf *fdf);
+int					mousebtnpress(int btncode, int x, int y, t_fdf *fdf);
 
 #endif

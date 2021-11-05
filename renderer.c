@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 20:25:52 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/05 21:41:27 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/05 22:17:56 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,16 @@ void	render_next_frame(t_fdf *fdf)
 	int			h;
 	int			w;
 	t_coords	coords;
-	int			tile_size;
 
-	tile_size = 16;
 	h = 0;
 	while (h < fdf->map->height)
 	{
 		w = 0;
 		while (w < fdf->map->width)
 		{
-			coords.x = h * tile_size + (w * tile_size * 0.75);
-			coords.y = w * tile_size - (h * tile_size);
-			coords.x -= fdf->map->map[h][w];
+			coords.x = h * fdf->map->tile_size + (w * fdf->map->tile_size * 0.75);
+			coords.y = w * fdf->map->tile_size - (h * fdf->map->tile_size);
+			coords.x -= (fdf->map->map[h][w] * 0.05 * fdf->map->tile_size);
 			(fdf->map->iso_map[h][w]).x = coords.x;
 			(fdf->map->iso_map[h][w]).y = coords.y;
 			put_pixel(fdf->mlx, coords.x, coords.y, 0x00FFFFFF);

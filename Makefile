@@ -6,7 +6,7 @@
 #    By: fbes <fbes@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/04/21 20:02:11 by fbes          #+#    #+#                  #
-#    Updated: 2021/11/05 20:26:43 by fbes          ########   odam.nl          #
+#    Updated: 2021/11/05 21:59:50 by fbes          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME =		fdf
 
 SRCS =		main.c map.c window.c setup.c drawer.c debug.c \
 			config_reader.c config_checker.c config_parser.c \
-			convert.c renderer.c
+			convert.c renderer.c controls.c
 
 INCLUDES =	-I lib/libft -I includes -I lib/mlx
 
