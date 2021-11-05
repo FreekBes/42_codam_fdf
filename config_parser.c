@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 19:02:16 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/05 19:45:48 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/05 21:14:55 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	conf_to_map(t_map *map, char **conf)
 	i = 0;
 	map->height = get_split_size(conf);
 	map->map = (int **)ft_calloc(map->height + 1, sizeof(int *));
+	map->iso_map = (t_coords **)ft_calloc(map->height + 1, sizeof(t_coords *));
 	while (conf[i] && err >= 0)
 	{
 		if (ft_strlen(conf[i]) > 0)
@@ -51,8 +52,9 @@ int	conf_to_map(t_map *map, char **conf)
 				break ;
 			}
 			map->map[i] = (int *)ft_calloc(map->width + 1, sizeof(int));
+			map->iso_map[i] = (t_coords *)ft_calloc(map->width + 1, sizeof(t_coords));
 			j = 0;
-			while (values[j])
+			while (values[j] && j < map->width)
 			{
 				map->map[i][j] = ft_atoi(values[j]);
 				j++;

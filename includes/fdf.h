@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 16:26:00 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/05 19:36:25 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/05 21:41:58 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,14 @@
 # define FDF_H
 
 # define DEFAULT_COLOR 0xFFFFFF
-# define RES_WIDTH 1280
-# define RES_HEIGHT 720
+# define RES_WIDTH 480
+# define RES_HEIGHT 360
+
+typedef struct s_coords
+{
+	int				x;
+	int				y;
+}					t_coords;
 
 typedef struct s_img
 {
@@ -33,12 +39,14 @@ typedef struct s_mlx_ctx
 	unsigned int	res_w;
 	unsigned int	res_h;
 	t_img			img;
+	t_coords		offset;
 }					t_mlx_ctx;
 
 typedef struct s_map
 {
 	unsigned int	default_color;
 	int				**map;
+	t_coords		**iso_map;
 	unsigned int	**colors;
 	int				width;
 	int				height;
@@ -65,5 +73,10 @@ void				setup_window(t_fdf *fdf, char *win_title);
 int					draw_next_frame(t_fdf *fdf);
 int					extension_valid(char *file_name, char *ext);
 void				print_map(t_map *map);
+void				render_next_frame(t_fdf *fdf);
+void				put_pixel(t_mlx_ctx *mlx, int h, int w, unsigned int c);
+void				draw_line(t_mlx_ctx *mlx, t_coords start, t_coords end, unsigned int c);
+void				cart_to_iso(const t_coords *cart, t_coords *iso);
+void				iso_to_cart(const t_coords *iso, t_coords *cart);
 
 #endif

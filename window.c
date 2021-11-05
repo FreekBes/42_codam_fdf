@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/29 20:24:02 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/05 18:43:16 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/05 21:43:28 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ int	init_mlx_context(t_fdf *fdf)
 	fdf->mlx->res_h = RES_HEIGHT;
 	fdf->mlx->win = NULL;
 	fdf->mlx->img.img_ptr = NULL;
+	fdf->mlx->offset.x = 0;
+	fdf->mlx->offset.y = 0;
 	fdf->mlx->core = mlx_init();
 	if (!fdf->mlx->core)
 		return (-2);
