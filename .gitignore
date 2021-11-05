@@ -1,3 +1,7 @@
+fdf
+*.DS_Store
+*.dylib
+
 # Prerequisites
 *.d
 
