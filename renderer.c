@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 20:25:52 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/06 22:08:45 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/06 22:30:40 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 #include "mlx.h"
 #include "fdf.h"
 
+/**
+ * Draw a line from map point to another map point
+ * The method will automatically start drawing gradients if necessary
+ * @param fdf	A pointer to the main fdf structure
+ * @param s		The line's starting coordinates
+ * @param e_x	The line's ending x coordinate
+ * @param e_y	The line's ending y coordinate
+ */
 static void	draw_line_to_point(t_fdf *fdf, t_coords *s, int e_x, int e_y)
 {
 	t_gradient	g;
@@ -30,6 +38,10 @@ static void	draw_line_to_point(t_fdf *fdf, t_coords *s, int e_x, int e_y)
 		draw_line(fdf->mlx, fdf->map->iso_map[s->y][s->x], &fdf->map->iso_map[e_y][e_x], DEFAULT_COLOR);
 }
 
+/**
+ * Draw lines from all points to their neighbors
+ * @param fdf	A pointer to the main fdf structure
+ */
 static void	draw_lines(t_fdf *fdf)
 {
 	t_coords	s;
@@ -50,6 +62,13 @@ static void	draw_lines(t_fdf *fdf)
 	}
 }
 
+/**
+ * Render a frame into the mlx canvas
+ * @param fdf		A pointer to the main fdf structure
+ * @param forced	Set to 1 to forcefully redraw the whole frame without
+ * 					optimalizations
+ * @return			Returns 1 if part of the frame has been redrawn, else 0
+ */
 int	render_next_frame(t_fdf *fdf, int forced)
 {
 	int				changed;

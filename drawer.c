@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 18:50:45 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/06 21:02:55 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/06 22:22:58 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,13 @@ void	draw_line_g(t_mlx_ctx *mlx, t_coords start, t_coords *end, t_gradient *g)
 	}
 }
 
+/**
+ * Get the address of a pixel on the canvas
+ * @param mlx	A pointer to a MLX context struct
+ * @param h		At which horizontal line to get the pixel
+ * @param w		At which vertical line to get the pixel
+ * @return		A pointer to said pixel
+ */
 static char	*get_pixel_addr(t_mlx_ctx *mlx, int h, int w)
 {
 	char	*dst;

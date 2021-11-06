@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 21:52:32 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/06 22:09:08 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/06 22:40:57 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 #include "fdf.h"
 #	include	<stdio.h>
 
+/**
+ * Reset the pressed keys
+ * @param keys_status	The struct containing key statuses
+ */
 void	reset_key_presses(t_keys_status *key_status)
 {
 	key_status->left = 0;
@@ -26,6 +30,10 @@ void	reset_key_presses(t_keys_status *key_status)
 	key_status->sq_br_r = 0;
 }
 
+/**
+ * Change fdf parameters based on which keys are currently pressed
+ * @param fdf	The main fdf struct
+ */
 void	handle_key_presses(t_fdf *fdf)
 {
 	int		move_dir_up_down;
@@ -38,13 +46,13 @@ void	handle_key_presses(t_fdf *fdf)
 	zoom = 1;
 	relief = 0;
 	if (fdf->key_stat.up)
-		move_dir_up_down += 1 + fdf->map->tile_size * 0.2;
+		move_dir_up_down += 1 + fdf->map->tile_size * 0.2 + fdf->map->width * 0.05;
 	if (fdf->key_stat.down)
-		move_dir_up_down -= 1 + fdf->map->tile_size * 0.2;
+		move_dir_up_down -= 1 + fdf->map->tile_size * 0.2 + fdf->map->width * 0.05;
 	if (fdf->key_stat.left)
-		move_dir_left_right += 1 + fdf->map->tile_size * 0.2;
+		move_dir_left_right += 1 + fdf->map->tile_size * 0.2 + fdf->map->width * 0.05;
 	if (fdf->key_stat.right)
-		move_dir_left_right -= 1 + fdf->map->tile_size * 0.2;
+		move_dir_left_right -= 1 + fdf->map->tile_size * 0.2 + fdf->map->width * 0.05;
 	if (fdf->key_stat.min)
 		zoom -= 0.1;
 	if (fdf->key_stat.plus)
@@ -61,6 +69,12 @@ void	handle_key_presses(t_fdf *fdf)
 	fdf->map->relief_factor += relief;
 }
 
+/**
+ * Let the program know a keyboard key has been pressed
+ * @param keycode	The keycode of the pressed key
+ * @param fdf		The main fdf struct
+ * @return			Always returns 1
+ */
 int	keypress(int keycode, t_fdf *fdf)
 {
 	if (keycode == KEY_ESC)
@@ -86,6 +100,12 @@ int	keypress(int keycode, t_fdf *fdf)
 	return (1);
 }
 
+/**
+ * Let the program know a keyboard key has been released
+ * @param keycode	The keycode of the released key
+ * @param fdf		The main fdf struct
+ * @return			Always returns 1
+ */
 int	keyrelease(int keycode, t_fdf *fdf)
 {
 	if (keycode == KEY_LEFT)
@@ -108,6 +128,11 @@ int	keyrelease(int keycode, t_fdf *fdf)
 	return (1);
 }
 
+/**
+ * Check if there are currently no keyboard keys pressed
+ * @param status	The struct containing key statuses
+ * @return			An integer, 1 if there are keys being pressed, 0 if not
+ */
 int	no_keys_pressed(t_keys_status *status)
 {
 	if (status->down || status->up || status->left || status->right

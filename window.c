@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/29 20:24:02 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/05 23:06:42 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/06 22:45:07 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 #include "fdf.h"
 #include "mlx.h"
 
+/**
+ * Create an mlx image instance in an mlx context struct
+ * @param ctx	A pointer to an mlx context struct
+ */
 static void	create_img(t_mlx_ctx *ctx)
 {
 	ctx->img.img_ptr = mlx_new_image(ctx->core, ctx->res_w, ctx->res_h);
@@ -22,6 +26,11 @@ static void	create_img(t_mlx_ctx *ctx)
 			&ctx->img.bits_per_pixel, &ctx->img.line_size, &ctx->img.endian);
 }
 
+/**
+ * Reduce the window size if it's too big
+ * @param ctx	A pointer to an mlx context struct
+ * @todo
+ */
 static void	catch_max_res_exception(t_mlx_ctx *ctx)
 {
 	int		scr_w;
@@ -34,6 +43,11 @@ static void	catch_max_res_exception(t_mlx_ctx *ctx)
 		ctx->res_h = (unsigned int)scr_h;
 }
 
+/**
+ * Free an mlx context structure
+ * @param ctc	An mlx context structure
+ * @return		Always returns NULL
+ */
 void	*free_mlx_context(t_mlx_ctx *ctx)
 {
 	if (ctx->img.img_ptr)
@@ -45,6 +59,11 @@ void	*free_mlx_context(t_mlx_ctx *ctx)
 	return (NULL);
 }
 
+/**
+ * Initialize an mlx context structure
+ * @param fdf	A pointer to the main fdf structure
+ * @return		Returns < 0 on error, 1 otherwise
+ */
 int	init_mlx_context(t_fdf *fdf)
 {
 	fdf->mlx = (t_mlx_ctx *)malloc(sizeof(t_mlx_ctx));
@@ -65,8 +84,15 @@ int	init_mlx_context(t_fdf *fdf)
 	return (1);
 }
 
+/**
+ * Create and show a window
+ * @param fdf		A pointer to the main fdf structure
+ * @param win_title	The title of the window to create
+ * @return			Returns 1 on success, -1 on error
+ */
 int	create_win(t_fdf *fdf, char *win_title)
 {
+	// TODO: make sure the max res is also used where RES_WIDTH and stuff is used
 	catch_max_res_exception(fdf->mlx);
 	fdf->mlx->win = mlx_new_window(fdf->mlx->core,
 			fdf->mlx->res_w, fdf->mlx->res_h, win_title);

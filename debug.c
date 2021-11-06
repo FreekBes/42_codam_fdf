@@ -6,13 +6,17 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 19:34:21 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/06 22:08:45 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/06 22:22:11 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "fdf.h"
 
+/**
+ * Print a map configuration for debugging purposes
+ * @param map	The map to print
+ */
 void	print_map(t_map *map)
 {
 	int		i;
@@ -35,6 +39,10 @@ void	print_map(t_map *map)
 	}
 }
 
+/**
+ * Reset the viewport of the window (map is rendered in center again)
+ * @param fdf	The main fdf structure
+ */
 void	reset_viewport(t_fdf *fdf)
 {
 	fdf->map->tile_size = RES_HEIGHT / fdf->map->height * 0.5;

@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 16:43:17 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/06 22:08:45 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/06 22:27:19 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 #include "libft.h"
 #include "fdf.h"
 
+/**
+ * Allocate and initialize a map structure
+ * @return		A map structure
+ */
 t_map	*init_map(void)
 {
 	t_map	*map;
@@ -33,9 +37,15 @@ t_map	*init_map(void)
 	return (map);
 }
 
+/**
+ * Free a map structure
+ * @param map	A map structure to free
+ * @return		Always returns NULL
+ */
 void	*free_map(t_map *map)
 {
 	ft_free_double_ptr((void **)map->map);
 	ft_free_double_ptr((void **)map->colors);
+	ft_free(map);
 	return (NULL);
 }

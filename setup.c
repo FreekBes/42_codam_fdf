@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 16:54:47 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/06 21:41:36 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/06 22:32:42 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,22 @@
 #include "libft.h"
 #include "fdf.h"
 
+/**
+ * Initialize the main fdf structure
+ * @param fdf	The main fdf structure
+ */
 void	init_fdf(t_fdf *fdf)
 {
 	fdf->map = NULL;
 	fdf->mlx = NULL;
 }
 
+/**
+ * Parse the arguments given to the program and handle them
+ * @param argc	The amount of arguments given
+ * @param argv	The arguments in a string array
+ * @param fdf	A pointer to the main fdf structure
+ */
 void	setup_args(int argc, char **argv, t_fdf *fdf)
 {
 	int		err;
@@ -41,11 +51,21 @@ void	setup_args(int argc, char **argv, t_fdf *fdf)
 	}
 }
 
+/**
+ * Method used to exit the program when ESC is pressed
+ * @param fdf	A pointer to the main fdf structure
+ * @return		Returns the value exit_fdf returns
+ */
 static int	exit_hook(t_fdf *fdf)
 {
 	return (exit_fdf(fdf, 0, NULL, NULL));
 }
 
+/**
+ * Setup the window
+ * @param fdf		A pointer to the main fdf structure
+ * @param win_title	The title of the program
+ */
 void	setup_window(t_fdf *fdf, char *win_title)
 {
 	create_win(fdf, win_title);

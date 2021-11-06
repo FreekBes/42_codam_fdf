@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 18:54:45 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/06 20:08:29 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/06 22:19:55 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 #include "libft.h"
 #include "fdf.h"
 
+/**
+ * Append a buffer to the string
+ * @param contents	The end string
+ * @param buff		The buffer to add
+ * @param buff_size	The size of the buffer
+ * @return			A pointer to contents
+ */
 static char	*append_buffer(char *contents, char *buff, size_t buff_size)
 {
 	static size_t	contents_size;
@@ -47,6 +54,14 @@ static char	*append_buffer(char *contents, char *buff, size_t buff_size)
 	return (contents);
 }
 
+/**
+ * Initialize the configuration parser
+ * @param conf_file	The path to the configuration file
+ * @param cont		A pointer to the future contents of said configuration file
+ * @param fd		A file descriptor to the configuration file
+ * @param buff		A pointer to the buffer which will be read to
+ * @return			Returns > 0 on success, < 0 on error
+ */
 static int	init_conf_parser(char *conf_file, char **cont, int *fd, void **buff)
 {
 	*cont = NULL;
@@ -62,6 +77,13 @@ static int	init_conf_parser(char *conf_file, char **cont, int *fd, void **buff)
 	return (1);
 }
 
+/**
+ * Read a configuration file from a file descriptor
+ * @param fd		The file descriptor to the configuration file
+ * @param buffer	A pointer to the buffer to which to read
+ * @param contents	A pointer to the end string to return
+ * @param err		A pointer to an integer in case of error numbers
+ */
 static int	read_conf(int fd, void **buffer, char **contents, int *err)
 {
 	int		i;
@@ -86,6 +108,12 @@ static int	read_conf(int fd, void **buffer, char **contents, int *err)
 	return (read_res);
 }
 
+/**
+ * Parse a configuration file from a path
+ * @param map		The map structure to parse to
+ * @param conf_file	The path to the configuration file to read
+ * @return			Returns < 0 on error
+ */
 int	parse_conf(t_map *map, char *conf_file)
 {
 	int		err;
