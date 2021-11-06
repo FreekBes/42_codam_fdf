@@ -6,11 +6,10 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 20:16:52 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/05 20:22:37 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/06 18:10:54 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <math.h>
 #include "fdf.h"
 
 void	cart_to_iso(const t_coords *cart, t_coords *iso)

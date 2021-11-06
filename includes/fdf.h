@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 16:26:00 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/06 17:49:14 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/06 19:37:02 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,9 +111,15 @@ int					draw_next_frame(t_fdf *fdf);
 int					extension_valid(char *file_name, char *ext);
 void				print_map(t_map *map);
 void				render_next_frame(t_fdf *fdf);
+unsigned int		parse_hex(const char *s);
+unsigned int		get_gradient_color(unsigned int color_s,
+						unsigned int color_e, double perc);
 void				put_pixel(t_mlx_ctx *mlx, int h, int w, unsigned int c);
-void				draw_line(t_mlx_ctx *mlx, t_coords start, t_coords end,
+void				put_pixel_e(t_mlx_ctx *mlx, int h, int w, unsigned int c);
+void				draw_line(t_mlx_ctx *mlx, t_coords start, t_coords *end,
 						unsigned int c);
+void				draw_line_g(t_mlx_ctx *mlx, t_coords start, t_coords *end,
+						t_gradient *g);
 void				cart_to_iso(const t_coords *cart, t_coords *iso);
 void				iso_to_cart(const t_coords *iso, t_coords *cart);
 void				reset_key_presses(t_keys_status *key_status);

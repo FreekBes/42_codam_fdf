@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/06 17:37:50 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/06 17:48:06 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/06 18:46:48 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,36 @@ unsigned int	get_gradient_color(unsigned int color_s, unsigned int color_e
 	res.g = start.g + perc * (end.g - start.g);
 	res.b = start.b + perc * (end.b - start.b);
 	return (argb_to_hex(&res));
+}
+
+/**
+ * Parse a color from a hex color string
+ * @param s		The string to parse
+ * @return		An unsigned int representation of the color
+ */
+unsigned int	parse_hex(const char *s)
+{
+	int				i;
+	unsigned int	color;
+
+	if (!s || !s[0] || !s[1])
+		return (0);
+	if (s[1] == 'x')
+		i = 2;
+	else
+		i = 0;
+	color = 0;
+	while (s[i])
+	{
+		if (s[i] >= '0' && s[i] <= '9')
+			color = color * 16 + ((int)s[i] - '0');
+		else if (s[i] >= 'A' && s[i] <= 'F')
+			color = color * 16 + 10 + ((int)s[i] - 'A');
+		else if (s[i] >= 'a' && s[i] <= 'f')
+			color = color * 16 + 10 + ((int)s[i] - 'a');
+		else
+			break ;
+		i++;
+	}
+	return (color);
 }
