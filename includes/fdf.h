@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 16:26:00 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/05 23:23:11 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/06 17:49:14 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,20 @@ typedef struct s_coords
 	int				x;
 	int				y;
 }					t_coords;
+
+typedef struct s_col_rgba
+{
+	int				r;
+	int				g;
+	int				b;
+	int				a;
+}					t_col_rgba;
+
+typedef struct s_gradient
+{
+	unsigned int	start;
+	unsigned int	end;
+}					t_gradient;
 
 typedef struct s_img
 {

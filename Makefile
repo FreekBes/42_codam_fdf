@@ -6,13 +6,13 @@
 #    By: fbes <fbes@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/04/21 20:02:11 by fbes          #+#    #+#                  #
-#    Updated: 2021/11/05 23:22:33 by fbes          ########   odam.nl          #
+#    Updated: 2021/11/06 17:48:17 by fbes          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =		fdf
 
-SRCS =		main.c map.c window.c setup.c drawer.c debug.c \
+SRCS =		main.c map.c window.c setup.c drawer.c debug.c colors.c \
 			config_reader.c config_checker.c config_parser.c \
 			convert.c renderer.c controls.c
 
