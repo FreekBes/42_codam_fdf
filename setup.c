@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 16:54:47 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/06 20:48:15 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/06 21:41:36 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	setup_window(t_fdf *fdf, char *win_title)
 	mlx_hook(fdf->mlx->win, 17, 1L << 17, &exit_hook, fdf);
 	mlx_hook(fdf->mlx->win, 2, 1L << 0, &keypress, fdf);
 	mlx_hook(fdf->mlx->win, 3, 1L << 1, &keyrelease, fdf);
-	mlx_hook(fdf->mlx->win, 4, 1L << 2, &mousebtnpress, fdf);
 	mlx_loop_hook(fdf->mlx->core, draw_next_frame, fdf);
 	mlx_loop(fdf->mlx->core);
 }

@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 16:26:00 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/06 21:02:29 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/06 22:03:19 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,15 @@
 # define RES_WIDTH 800
 # define RES_HEIGHT 500
 
+# define KEY_ZERO 29
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
 # define KEY_DOWN 125
 # define KEY_UP 126
+# define KEY_EQUALS 24
+# define KEY_MIN 27
+# define KEY_SQ_BRACKET_L 33
+# define KEY_SQ_BRACKET_R 30
 # define KEY_ESC 53
 # define BTN_MOUSE_L 1
 # define BTN_MOUSE_R 2
@@ -71,7 +76,7 @@ typedef struct s_mlx_ctx
 typedef struct s_map
 {
 	unsigned int	default_color;
-	int				tile_size;
+	double			tile_size;
 	double			translate_h;
 	int				**map;
 	t_coords		**iso_map;
@@ -86,6 +91,10 @@ typedef struct s_keys_status
 	int				right;
 	int				up;
 	int				down;
+	int				plus;
+	int				min;
+	int				sq_br_l;
+	int				sq_br_r;
 }					t_keys_status;
 
 typedef struct s_fdf
@@ -129,5 +138,6 @@ int					keypress(int keycode, t_fdf *fdf);
 int					keyrelease(int keycode, t_fdf *fdf);
 int					mousebtnpress(int btncode, int x, int y, t_fdf *fdf);
 int					no_keys_pressed(t_keys_status *status);
+void				reset_viewport(t_fdf *fdf);
 
 #endif

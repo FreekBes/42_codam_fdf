@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 19:34:21 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/06 18:44:24 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/06 22:05:22 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,13 @@ void	print_map(t_map *map)
 		ft_putchar_fd('\n', 1);
 		i++;
 	}
+}
+
+void	reset_viewport(t_fdf *fdf)
+{
+	fdf->map->tile_size = RES_HEIGHT / fdf->map->height * 0.5;
+	fdf->map->translate_h = DEFAULT_TRANSLATE_H;
+	fdf->map->default_color = DEFAULT_COLOR;
+	fdf->mlx->offset.x = RES_HEIGHT * 0.1;
+	fdf->mlx->offset.y = RES_WIDTH * 0.4;
 }
