@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 16:54:47 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/05 22:12:56 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/06 20:48:15 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ void	setup_args(int argc, char **argv, t_fdf *fdf)
 			exit_fdf(fdf, EXIT_FAILURE, "Malloc for map failed", NULL);
 		if (parse_conf(fdf->map, argv[1]) < 0)
 			exit_fdf(fdf, EXIT_FAILURE, "Failed to load config", NULL);
+		fdf->map->tile_size = RES_HEIGHT / fdf->map->height * 0.5;
+		if (fdf->map->tile_size <= 0)
+			fdf->map->tile_size = 1;
 	}
 }
 

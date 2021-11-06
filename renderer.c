@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 20:25:52 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/06 20:17:20 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/06 20:52:02 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,14 @@ int	render_next_frame(t_fdf *fdf)
 	t_coords		coords;
 	static double	rot;
 	static double	last_tile_size;
+	static double	last_translate_h;
 	static t_coords	last_offset;
 
 	changed = 0;
-	if (rot == 0)
+	if (rot == 0 || fdf->map->tile_size != last_tile_size || fdf->map->translate_h != last_translate_h)
 	{
+		last_translate_h = fdf->map->translate_h;
+		last_tile_size = fdf->map->tile_size;
 		ft_putendl_fd("Calculating isographic coordinates...", 1);
 		rot = 0.75;
 		h = 0;
@@ -80,11 +83,10 @@ int	render_next_frame(t_fdf *fdf)
 			}
 			h++;
 		}
+		changed = 1;
 	}
-	if (last_tile_size == 0 || fdf->map->tile_size != last_tile_size ||
-		last_offset.x != fdf->mlx->offset.x || last_offset.y != fdf->mlx->offset.y)
+	if (changed == 1 || last_offset.x != fdf->mlx->offset.x || last_offset.y != fdf->mlx->offset.y)
 	{
-		last_tile_size = fdf->map->tile_size;
 		last_offset.x = fdf->mlx->offset.x;
 		last_offset.y = fdf->mlx->offset.y;
 		ft_putendl_fd("Clearing image...", 1);
