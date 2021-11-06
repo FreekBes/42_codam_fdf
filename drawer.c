@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 18:50:45 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/05 23:00:51 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/06 17:29:15 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	put_pixel(t_mlx_ctx *mlx, int h, int w, unsigned int c)
 
 	h += mlx->offset.x;
 	w += mlx->offset.y;
-	if (h > mlx->res_h || w > mlx->res_w || h < 0 || w < 0)
+	if (h >= mlx->res_h || w >= mlx->res_w || h < 0 || w < 0)
 		return ;
 	dst = mlx->img.address + h * mlx->img.line_size
 		+ w * (mlx->img.bits_per_pixel / 8);
