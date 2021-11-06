@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 18:54:45 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/05 19:18:01 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/06 19:59:34 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,33 @@
 
 static char	*append_buffer(char *contents, char *buff, size_t buff_size)
 {
-	char	*temp;
-	size_t	contents_len;
+	static size_t	contents_size;
+	static size_t	contents_len;
+	char			*temp;
 
 	if (!contents)
 	{
-		contents = ft_calloc(buff_size + 1, sizeof(char));
+		contents_size = buff_size + 1;
+		contents = ft_calloc(contents_size, sizeof(char));
 		contents_len = 0;
 	}
 	else
 	{
-		contents_len = ft_strlen(contents);
-		temp = ft_calloc(contents_len + buff_size + 1, sizeof(char));
-		if (!temp)
-			return (NULL);
-		ft_memmove(temp, contents, contents_len);
-		ft_free(contents);
-		contents = temp;
+		if (contents_len + buff_size >= contents_size)
+		{
+			contents_size *= 2;
+			temp = ft_calloc(contents_size, sizeof(char));
+			if (!temp)
+				return (ft_free(contents));
+			ft_memmove(temp, contents, contents_len);
+			ft_free(contents);
+			contents = temp;
+		}
 	}
 	if (!contents)
 		return (NULL);
 	ft_memmove(contents + contents_len, buff, buff_size);
+	contents_len += buff_size;
 	return (contents);
 }
 
@@ -50,7 +56,7 @@ static int	init_conf_parser(char *conf_file, char **cont, int *fd, void **buff)
 	*fd = open(conf_file, O_RDONLY);
 	if (*fd < 0)
 		return (-31);
-	*buff = ft_calloc(sizeof(char), 256);
+	*buff = ft_calloc(sizeof(char), 5012);
 	if (!*buff)
 		return (-6);
 	return (1);
@@ -58,20 +64,23 @@ static int	init_conf_parser(char *conf_file, char **cont, int *fd, void **buff)
 
 static int	read_conf(int fd, void **buffer, char **contents, int *err)
 {
+	int		i;
 	int		read_res;
 
-	read_res = read(fd, *buffer, 255);
+	i = 0;
+	read_res = read(fd, *buffer, 5011);
 	while (read_res > 0)
 	{
-		*contents = append_buffer(*contents, *buffer, 255);
+		*contents = append_buffer(*contents, *buffer, 5011);
 		if (!*contents)
 		{
 			*err = -6;
 			read_res = 1;
 			break ;
 		}
-		ft_bzero(*buffer, 255);
-		read_res = read(fd, *buffer, 255);
+		ft_bzero(*buffer, 5011);
+		read_res = read(fd, *buffer, 5011);
+		i++;
 	}
 	return (read_res);
 }
