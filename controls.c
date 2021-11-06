@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 21:52:32 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/06 20:01:46 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/06 21:06:05 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ void	handle_key_presses(t_fdf *fdf)
 	move_dir_up_down = 0;
 	move_dir_left_right = 0;
 	if (fdf->key_stat.up)
-		move_dir_up_down += fdf->map->width * 0.2;
+		move_dir_up_down += fdf->map->tile_size;
 	if (fdf->key_stat.down)
-		move_dir_up_down -= fdf->map->width * 0.2;
+		move_dir_up_down -= fdf->map->tile_size;
 	if (fdf->key_stat.left)
-		move_dir_left_right += fdf->map->width * 0.2;
+		move_dir_left_right += fdf->map->tile_size;
 	if (fdf->key_stat.right)
-		move_dir_left_right -= fdf->map->width * 0.2;
+		move_dir_left_right -= fdf->map->tile_size;
 	fdf->mlx->offset.y += move_dir_left_right;
 	fdf->mlx->offset.x += move_dir_up_down;
 }
@@ -66,6 +66,7 @@ int	keyrelease(int keycode, t_fdf *fdf)
 		fdf->key_stat.up = 0;
 	else if (keycode == KEY_DOWN)
 		fdf->key_stat.down = 0;
+	render_next_frame(fdf, 1);
 	return (1);
 }
 
@@ -88,5 +89,12 @@ int	mousebtnpress(int btn_code, int x, int y, t_fdf *fdf)
 	}
 	if (fdf->map->tile_size <= 0)
 		fdf->map->tile_size = 1;
+	return (1);
+}
+
+int	no_keys_pressed(t_keys_status *status)
+{
+	if (status->down || status->up || status->left || status->right)
+		return (0);
 	return (1);
 }

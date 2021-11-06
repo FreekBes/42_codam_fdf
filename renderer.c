@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 20:25:52 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/06 20:52:02 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/06 21:02:45 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	draw_lines(t_fdf *fdf)
 	}
 }
 
-int	render_next_frame(t_fdf *fdf)
+int	render_next_frame(t_fdf *fdf, int forced)
 {
 	int				changed;
 	int				h;
@@ -62,7 +62,7 @@ int	render_next_frame(t_fdf *fdf)
 	static t_coords	last_offset;
 
 	changed = 0;
-	if (rot == 0 || fdf->map->tile_size != last_tile_size || fdf->map->translate_h != last_translate_h)
+	if (forced || rot == 0 || fdf->map->tile_size != last_tile_size || fdf->map->translate_h != last_translate_h)
 	{
 		last_translate_h = fdf->map->translate_h;
 		last_tile_size = fdf->map->tile_size;
@@ -85,7 +85,7 @@ int	render_next_frame(t_fdf *fdf)
 		}
 		changed = 1;
 	}
-	if (changed == 1 || last_offset.x != fdf->mlx->offset.x || last_offset.y != fdf->mlx->offset.y)
+	if (forced || changed == 1 || last_offset.x != fdf->mlx->offset.x || last_offset.y != fdf->mlx->offset.y)
 	{
 		last_offset.x = fdf->mlx->offset.x;
 		last_offset.y = fdf->mlx->offset.y;
@@ -99,15 +99,18 @@ int	render_next_frame(t_fdf *fdf)
 			while (w < fdf->map->width)
 			{
 				if (fdf->map->colors[h][w] != 0)
-					put_pixel(fdf->mlx, coords.x, coords.y, fdf->map->colors[h][w]);
+					put_pixel(fdf->mlx, (fdf->map->iso_map[h][w]).x, (fdf->map->iso_map[h][w]).y, fdf->map->colors[h][w]);
 				else
-					put_pixel(fdf->mlx, coords.x, coords.y, DEFAULT_COLOR);
+					put_pixel(fdf->mlx, (fdf->map->iso_map[h][w]).x, (fdf->map->iso_map[h][w]).y, DEFAULT_COLOR);
 				w++;
 			}
 			h++;
 		}
-		ft_putendl_fd("Drawing lines...", 1);
-		draw_lines(fdf);
+		if (no_keys_pressed(&fdf->key_stat))
+		{
+			ft_putendl_fd("Drawing lines...", 1);
+			draw_lines(fdf);
+		}
 		changed = 1;
 	}
 	return (changed);

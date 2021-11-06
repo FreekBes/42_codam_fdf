@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 16:26:00 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/06 20:15:19 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/06 21:02:29 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void				setup_window(t_fdf *fdf, char *win_title);
 int					draw_next_frame(t_fdf *fdf);
 int					extension_valid(char *file_name, char *ext);
 void				print_map(t_map *map);
-int					render_next_frame(t_fdf *fdf);
+int					render_next_frame(t_fdf *fdf, int forced);
 unsigned int		parse_hex(const char *s);
 unsigned int		get_gradient_color(unsigned int color_s,
 						unsigned int color_e, double perc);
@@ -128,5 +128,6 @@ void				handle_key_presses(t_fdf *fdf);
 int					keypress(int keycode, t_fdf *fdf);
 int					keyrelease(int keycode, t_fdf *fdf);
 int					mousebtnpress(int btncode, int x, int y, t_fdf *fdf);
+int					no_keys_pressed(t_keys_status *status);
 
 #endif

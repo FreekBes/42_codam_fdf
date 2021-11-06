@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 18:50:45 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/06 20:15:10 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/06 21:02:55 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,7 +184,7 @@ int	draw_next_frame(t_fdf *fdf)
 {
 	handle_key_presses(fdf);
 	mlx_sync(MLX_SYNC_WIN_FLUSH_CMD, fdf->mlx->win);
-	render_next_frame(fdf);
+	render_next_frame(fdf, 0);
 	mlx_sync(MLX_SYNC_IMAGE_WRITABLE, fdf->mlx->img.img_ptr);
 	mlx_put_image_to_window(fdf->mlx->core, fdf->mlx->win,
 		fdf->mlx->img.img_ptr, 0, 0);
