@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 19:02:16 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/06 18:50:18 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/06 20:08:53 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	conf_to_map(t_map *map, char **conf)
 
 	if (!conf)
 		return (-1);
+	ft_putendl_fd("Parsing config...", 1);
 	err = 0;
 	i = 0;
 	map->height = get_split_size(conf);
@@ -72,6 +73,6 @@ int	conf_to_map(t_map *map, char **conf)
 		i++;
 	}
 	ft_free_double_ptr((void **)conf);
-	print_map(map);
+	//print_map(map);
 	return (err);
 }

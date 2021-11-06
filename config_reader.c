@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 18:54:45 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/06 19:59:34 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/06 20:08:29 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ static int	read_conf(int fd, void **buffer, char **contents, int *err)
 	int		read_res;
 
 	i = 0;
+	ft_putendl_fd("Reading config...", 1);
 	read_res = read(fd, *buffer, 5011);
 	while (read_res > 0)
 	{

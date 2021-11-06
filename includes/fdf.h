@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 16:26:00 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/06 19:37:02 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/06 20:15:19 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,10 +110,11 @@ void				setup_window(t_fdf *fdf, char *win_title);
 int					draw_next_frame(t_fdf *fdf);
 int					extension_valid(char *file_name, char *ext);
 void				print_map(t_map *map);
-void				render_next_frame(t_fdf *fdf);
+int					render_next_frame(t_fdf *fdf);
 unsigned int		parse_hex(const char *s);
 unsigned int		get_gradient_color(unsigned int color_s,
 						unsigned int color_e, double perc);
+void				clear_img(t_mlx_ctx *mlx);
 void				put_pixel(t_mlx_ctx *mlx, int h, int w, unsigned int c);
 void				put_pixel_e(t_mlx_ctx *mlx, int h, int w, unsigned int c);
 void				draw_line(t_mlx_ctx *mlx, t_coords start, t_coords *end,
