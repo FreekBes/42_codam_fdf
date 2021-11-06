@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 21:52:32 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/05 23:23:40 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/06 20:01:46 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ void	handle_key_presses(t_fdf *fdf)
 	move_dir_up_down = 0;
 	move_dir_left_right = 0;
 	if (fdf->key_stat.up)
-		move_dir_up_down += 2;
+		move_dir_up_down += fdf->map->width * 0.2;
 	if (fdf->key_stat.down)
-		move_dir_up_down -= 2;
+		move_dir_up_down -= fdf->map->width * 0.2;
 	if (fdf->key_stat.left)
-		move_dir_left_right += 2;
+		move_dir_left_right += fdf->map->width * 0.2;
 	if (fdf->key_stat.right)
-		move_dir_left_right -= 2;
+		move_dir_left_right -= fdf->map->width * 0.2;
 	fdf->mlx->offset.y += move_dir_left_right;
 	fdf->mlx->offset.x += move_dir_up_down;
 }
@@ -72,7 +72,6 @@ int	keyrelease(int keycode, t_fdf *fdf)
 int	mousebtnpress(int btn_code, int x, int y, t_fdf *fdf)
 {
 	x = y;
-
 	if (btn_code == BTN_MOUSE_L)
 		fdf->map->translate_h += 0.05;
 	else if (btn_code == BTN_MOUSE_R)
