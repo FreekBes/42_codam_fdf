@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 21:52:32 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/06 22:03:03 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/06 22:09:08 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ void	handle_key_presses(t_fdf *fdf)
 	int		move_dir_up_down;
 	int		move_dir_left_right;
 	double	zoom;
-	double	translate;
+	double	relief;
 
 	move_dir_up_down = 0;
 	move_dir_left_right = 0;
 	zoom = 1;
-	translate = 0;
+	relief = 0;
 	if (fdf->key_stat.up)
 		move_dir_up_down += 1 + fdf->map->tile_size * 0.2;
 	if (fdf->key_stat.down)
@@ -50,15 +50,15 @@ void	handle_key_presses(t_fdf *fdf)
 	if (fdf->key_stat.plus)
 		zoom += 0.1;
 	if (fdf->key_stat.sq_br_l)
-		translate -= 0.01;
+		relief -= 0.01;
 	if (fdf->key_stat.sq_br_r)
-		translate += 0.01;
+		relief += 0.01;
 	fdf->mlx->offset.y += move_dir_left_right;
 	fdf->mlx->offset.x += move_dir_up_down;
 	fdf->map->tile_size *= zoom;
 	if (fdf->map->tile_size < 1)
 		fdf->map->tile_size = 1;
-	fdf->map->translate_h += translate;
+	fdf->map->relief_factor += relief;
 }
 
 int	keypress(int keycode, t_fdf *fdf)

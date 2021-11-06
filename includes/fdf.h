@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 16:26:00 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/06 22:03:19 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/06 22:08:45 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # define DEFAULT_COLOR 0x00FFFFFF
 # define DEFAULT_TILE_SIZE_FACTOR 30
-# define DEFAULT_TRANSLATE_H 0.5
+# define DEFAULT_relief_factor 0.5
 # define RES_WIDTH 800
 # define RES_HEIGHT 500
 
@@ -77,7 +77,7 @@ typedef struct s_map
 {
 	unsigned int	default_color;
 	double			tile_size;
-	double			translate_h;
+	double			relief_factor;
 	int				**map;
 	t_coords		**iso_map;
 	unsigned int	**colors;

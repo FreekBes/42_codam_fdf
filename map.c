@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 16:43:17 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/06 20:20:00 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/06 22:08:45 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_map	*init_map(void)
 	map->tile_size = RES_HEIGHT / DEFAULT_TILE_SIZE_FACTOR;
 	if (map->tile_size <= 0)
 		return (ft_free(map));
-	map->translate_h = DEFAULT_TRANSLATE_H;
+	map->relief_factor = DEFAULT_relief_factor;
 	map->width = 0;
 	map->height = 0;
 	return (map);

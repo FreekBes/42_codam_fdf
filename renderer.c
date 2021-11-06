@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 20:25:52 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/06 21:49:55 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/06 22:08:45 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,13 @@ int	render_next_frame(t_fdf *fdf, int forced)
 	t_coords		coords;
 	static double	rot;
 	static double	last_tile_size;
-	static double	last_translate_h;
+	static double	last_relief_factor;
 	static t_coords	last_offset;
 
 	changed = 0;
-	if (forced || rot == 0 || fdf->map->tile_size != last_tile_size || fdf->map->translate_h != last_translate_h)
+	if (forced || rot == 0 || fdf->map->tile_size != last_tile_size || fdf->map->relief_factor != last_relief_factor)
 	{
-		last_translate_h = fdf->map->translate_h;
+		last_relief_factor = fdf->map->relief_factor;
 		last_tile_size = fdf->map->tile_size;
 		ft_putendl_fd("Calculating isographic coordinates...", 1);
 		rot = 0.75;
@@ -76,7 +76,7 @@ int	render_next_frame(t_fdf *fdf, int forced)
 			{
 				coords.x = h * fdf->map->tile_size + (w * fdf->map->tile_size * rot);
 				coords.y = w * fdf->map->tile_size - (h * fdf->map->tile_size);
-				coords.x -= (fdf->map->map[h][w] * fdf->map->translate_h * fdf->map->tile_size);
+				coords.x -= (fdf->map->map[h][w] * fdf->map->relief_factor * fdf->map->tile_size);
 				(fdf->map->iso_map[h][w]).x = coords.x;
 				(fdf->map->iso_map[h][w]).y = coords.y;
 				w++;
