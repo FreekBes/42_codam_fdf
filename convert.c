@@ -6,30 +6,23 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 20:16:52 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/06 22:21:27 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/08 18:03:40 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include "fdf.h"
 
 /**
- * Convert default coordinates to isometric coordinates
- * @param cart	A pointer to the default coordinates struct
- * @param iso	A pointer to the isometric coordinates struct
+ * Convert degrees to radians
+ * @param degree	The degree to convert
+ * @return			The degree as a radian
  */
-void	cart_to_iso(const t_coords *cart, t_coords *iso)
+float	degree_to_radians(int degree)
 {
-	iso->x = cart->x - cart->y;
-	iso->y = (cart->x + cart->y) / 2;
-}
-
-/**
- * Convert isometric coordinates to default coordinates
- * @param iso	A pointer to the isometric coordinates struct
- * @param cart	A pointer to the default coordinates struct
- */
-void	iso_to_cart(const t_coords *iso, t_coords *cart)
-{
-	cart->x = (2 * iso->y + iso->x) / 2;
-	cart->y = (2 * iso->y - iso->x) / 2;
+	if (degree < 0)
+		degree = 360;
+	else if (degree > 360)
+		degree = 0;
+	return (degree * M_PI / 180);
 }

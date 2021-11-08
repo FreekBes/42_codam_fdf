@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 16:26:00 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/08 17:30:06 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/08 17:57:19 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,9 @@
 # define KEY_MIN 27
 # define KEY_SQ_BRACKET_L 33
 # define KEY_SQ_BRACKET_R 30
+# define KEY_COMMA 43
+# define KEY_DOT 47
 # define KEY_ESC 53
-# define BTN_MOUSE_L 1
-# define BTN_MOUSE_R 2
-# define BTN_SCROLL_UP 4
-# define BTN_SCROLL_DOWN 5
 
 typedef struct s_coords
 {
@@ -71,6 +69,7 @@ typedef struct s_mlx_ctx
 	unsigned int	res_h;
 	t_img			img;
 	t_coords		offset;
+	int				rotation;
 }					t_mlx_ctx;
 
 typedef struct s_map
@@ -95,6 +94,8 @@ typedef struct s_keys_status
 	int				min;
 	int				sq_br_l;
 	int				sq_br_r;
+	int				comma;
+	int				dot;
 }					t_keys_status;
 
 typedef struct s_fdf
@@ -131,8 +132,7 @@ void				draw_line(t_mlx_ctx *mlx, t_coords start, t_coords *end,
 						unsigned int c);
 void				draw_line_g(t_mlx_ctx *mlx, t_coords start, t_coords *end,
 						t_gradient *g);
-void				cart_to_iso(const t_coords *cart, t_coords *iso);
-void				iso_to_cart(const t_coords *iso, t_coords *cart);
+float				degree_to_radians(int degree);
 void				reset_key_presses(t_keys_status *key_status);
 void				handle_key_presses(t_fdf *fdf);
 int					keypress(int keycode, t_fdf *fdf);

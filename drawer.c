@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 18:50:45 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/08 17:24:56 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/08 17:35:30 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	draw_line(t_mlx_ctx *mlx, t_coords start, t_coords *end, unsigned int c)
 	err = init_line_draw(&d, &s, &start, end);
 	while (1)
 	{
-		put_pixel_e(mlx, start.x, start.y, c);
+		put_pixel(mlx, start.x, start.y, c);
 		if (start.x == end->x && start.y == end->y)
 			break ;
 		e2 = err;
@@ -115,7 +115,7 @@ void	draw_line_g(t_mlx_ctx *mlx, t_coords start, t_coords *end, t_gradient *g)
 	i = 0;
 	while (1)
 	{
-		put_pixel_e(mlx, start.x, start.y, get_gradient_color(g->start, g->end, (double)i / (double)len));
+		put_pixel(mlx, start.x, start.y, get_gradient_color(g->start, g->end, (double)i / (double)len));
 		if (start.x == end->x && start.y == end->y)
 			break ;
 		e2 = err;

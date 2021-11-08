@@ -6,13 +6,15 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 20:25:52 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/08 17:27:13 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/08 18:07:02 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include "libft.h"
 #include "mlx.h"
 #include "fdf.h"
+#	include	<stdio.h>
 
 /**
  * Draw a line from map point to another map point
@@ -77,27 +79,26 @@ int	render_next_frame(t_fdf *fdf, int forced)
 	int				h;
 	int				w;
 	t_coords		coords;
-	static double	rot;
+	static int		last_rotation;
 	static double	last_tile_size;
 	static double	last_relief_factor;
 	static t_coords	last_offset;
 
 	changed = 0;
-	if (forced || rot == 0 || fdf->map->tile_size != last_tile_size || fdf->map->relief_factor != last_relief_factor)
+	if (forced || fdf->mlx->rotation != last_rotation || fdf->map->tile_size != last_tile_size || fdf->map->relief_factor != last_relief_factor)
 	{
+		last_rotation = fdf->mlx->rotation;
 		last_relief_factor = fdf->map->relief_factor;
 		last_tile_size = fdf->map->tile_size;
 		ft_putendl_fd("Calculating isographic coordinates...", 1);
-		rot = 0.75;
 		h = 0;
 		while (h < fdf->map->height)
 		{
 			w = 0;
 			while (w < fdf->map->width)
 			{
-				coords.x = h * fdf->map->tile_size + (w * fdf->map->tile_size * rot);
-				coords.y = w * fdf->map->tile_size - (h * fdf->map->tile_size);
-				coords.x -= (fdf->map->map[h][w] * fdf->map->relief_factor * fdf->map->tile_size);
+				coords.x = -(fdf->map->map[h][w] * fdf->map->relief_factor * fdf->map->tile_size) + (w * fdf->map->tile_size + h * fdf->map->tile_size) * sin(degree_to_radians(fdf->mlx->rotation));
+				coords.y = (w * fdf->map->tile_size - h * fdf->map->tile_size) * cos(degree_to_radians(fdf->mlx->rotation));
 				(fdf->map->iso_map[h][w]).x = coords.x;
 				(fdf->map->iso_map[h][w]).y = coords.y;
 				w++;
