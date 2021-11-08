@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 20:25:52 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/06 22:30:40 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/08 17:27:13 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static void	draw_line_to_point(t_fdf *fdf, t_coords *s, int e_x, int e_y)
 {
 	t_gradient	g;
 
+	if (is_off_screen(fdf->mlx, fdf->map->iso_map[s->y][s->x]))
+		return ;
 	g.start = DEFAULT_COLOR;
 	g.end = DEFAULT_COLOR;
 	if (fdf->map->colors[s->y][s->x] != 0)

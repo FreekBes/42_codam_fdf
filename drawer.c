@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 18:50:45 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/06 22:22:58 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/08 17:24:56 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,22 @@
 #include "libft.h"
 #include "mlx.h"
 #include "fdf.h"
+
+/**
+ * Check if a coordinate is off-screen
+ * @param t_coords	The coordinates to check
+ * @return			Returns 1 if off-screen, 0 if not
+ */
+int	is_off_screen(t_mlx_ctx *mlx, t_coords coords)
+{
+	coords.x += mlx->offset.x;
+	coords.y += mlx->offset.y;
+	if (coords.x < 0 || coords.x >= mlx->res_h)
+		return (1);
+	else if (coords.y < 0 || coords.y >= mlx->res_w)
+		return (1);
+	return (0);
+}
 
 /**
  * Initialize the drawing of a line for Bresenham's Line Algorithm
