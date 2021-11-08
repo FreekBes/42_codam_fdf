@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 19:02:16 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/06 22:15:22 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/08 17:12:14 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	conf_to_map(t_map *map, char **conf)
 			else if (get_split_size(values) != map->width)
 			{
 				err = -2;
+				ft_free_double_ptr((void **)values);
 				break ;
 			}
 			map->map[i] = (int *)ft_calloc(map->width + 1, sizeof(int));
