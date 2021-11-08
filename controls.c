@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 21:52:32 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/08 19:19:01 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/08 19:33:11 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ void	handle_key_presses(t_fdf *fdf)
 	fdf->mlx->rotation += rot;
 	if (fdf->map->tile_size < 1)
 		fdf->map->tile_size = 1;
+	else if (fdf->map->tile_size > RES_WIDTH)
+		fdf->map->tile_size = RES_WIDTH;
 	fdf->map->relief_factor += relief;
 	if (fdf->mlx->rotation < 0)
 		fdf->mlx->rotation = 0;
