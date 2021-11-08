@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 16:26:00 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/08 17:23:52 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/08 17:30:06 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # define DEFAULT_COLOR 0x00FFFFFF
 # define DEFAULT_TILE_SIZE_FACTOR 30
-# define DEFAULT_relief_factor 0.5
+# define DEFAULT_RELIEF_FACTOR 0.5
 # define RES_WIDTH 800
 # define RES_HEIGHT 500
 
