@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 20:16:52 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/08 18:03:40 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/08 19:00:08 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * @param degree	The degree to convert
  * @return			The degree as a radian
  */
-float	degree_to_radians(int degree)
+double	degree_to_radians(int degree)
 {
 	if (degree < 0)
 		degree = 360;

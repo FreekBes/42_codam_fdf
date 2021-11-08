@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 19:34:21 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/08 17:35:56 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/08 19:12:07 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,5 @@ void	reset_viewport(t_fdf *fdf)
 	fdf->map->default_color = DEFAULT_COLOR;
 	fdf->mlx->offset.x = RES_HEIGHT * 0.1;
 	fdf->mlx->offset.y = RES_WIDTH * 0.4;
+	fdf->mlx->rotation = degree_to_radians(30);
 }

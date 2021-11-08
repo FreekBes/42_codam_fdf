@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 16:26:00 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/08 17:57:19 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/08 19:17:58 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@
 # define DEFAULT_COLOR 0x00FFFFFF
 # define DEFAULT_TILE_SIZE_FACTOR 30
 # define DEFAULT_RELIEF_FACTOR 0.5
-# define RES_WIDTH 800
-# define RES_HEIGHT 500
+# define RES_WIDTH 1600
+# define RES_HEIGHT 900
+# define ALWAYS_DRAW_LINES 0
+# define MAX_ROTATION 45
 
 # define KEY_ZERO 29
 # define KEY_LEFT 123
@@ -37,6 +39,13 @@ typedef struct s_coords
 	int				x;
 	int				y;
 }					t_coords;
+
+typedef struct s_zcoords
+{
+	int				x;
+	int				y;
+	int				z;
+}					t_zcoords;
 
 typedef struct s_col_rgba
 {
@@ -69,7 +78,8 @@ typedef struct s_mlx_ctx
 	unsigned int	res_h;
 	t_img			img;
 	t_coords		offset;
-	int				rotation;
+	double			rotation;
+	double			max_rotation;
 }					t_mlx_ctx;
 
 typedef struct s_map
@@ -132,7 +142,8 @@ void				draw_line(t_mlx_ctx *mlx, t_coords start, t_coords *end,
 						unsigned int c);
 void				draw_line_g(t_mlx_ctx *mlx, t_coords start, t_coords *end,
 						t_gradient *g);
-float				degree_to_radians(int degree);
+double				degree_to_radians(int degree);
+void				rotate(int degree, t_zcoords *coords, t_zcoords *rcoords);
 void				reset_key_presses(t_keys_status *key_status);
 void				handle_key_presses(t_fdf *fdf);
 int					keypress(int keycode, t_fdf *fdf);

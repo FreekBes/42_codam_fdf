@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 20:25:52 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/08 18:07:02 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/08 19:12:52 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ static void	draw_line_to_point(t_fdf *fdf, t_coords *s, int e_x, int e_y)
 {
 	t_gradient	g;
 
-	if (is_off_screen(fdf->mlx, fdf->map->iso_map[s->y][s->x]))
+	if (is_off_screen(fdf->mlx, fdf->map->iso_map[s->y][s->x]) &&
+			is_off_screen(fdf->mlx, fdf->map->iso_map[e_y][e_x]))
 		return ;
 	g.start = DEFAULT_COLOR;
 	g.end = DEFAULT_COLOR;
@@ -78,8 +79,8 @@ int	render_next_frame(t_fdf *fdf, int forced)
 	int				changed;
 	int				h;
 	int				w;
-	t_coords		coords;
-	static int		last_rotation;
+	t_zcoords		coords;
+	static double	last_rotation;
 	static double	last_tile_size;
 	static double	last_relief_factor;
 	static t_coords	last_offset;
@@ -97,8 +98,9 @@ int	render_next_frame(t_fdf *fdf, int forced)
 			w = 0;
 			while (w < fdf->map->width)
 			{
-				coords.x = -(fdf->map->map[h][w] * fdf->map->relief_factor * fdf->map->tile_size) + (w * fdf->map->tile_size + h * fdf->map->tile_size) * sin(degree_to_radians(fdf->mlx->rotation));
-				coords.y = (w * fdf->map->tile_size - h * fdf->map->tile_size) * cos(degree_to_radians(fdf->mlx->rotation));
+				coords.z = fdf->map->map[h][w] * fdf->map->relief_factor * fdf->map->tile_size;
+				coords.x = -coords.z + (w * fdf->map->tile_size + h * fdf->map->tile_size) * sin(fdf->mlx->rotation);
+				coords.y = (w * fdf->map->tile_size - h * fdf->map->tile_size) * cos(fdf->mlx->rotation);
 				(fdf->map->iso_map[h][w]).x = coords.x;
 				(fdf->map->iso_map[h][w]).y = coords.y;
 				w++;
@@ -128,7 +130,7 @@ int	render_next_frame(t_fdf *fdf, int forced)
 			}
 			h++;
 		}
-		if (no_keys_pressed(&fdf->key_stat))
+		if (ALWAYS_DRAW_LINES || no_keys_pressed(&fdf->key_stat))
 		{
 			ft_putendl_fd("Drawing lines...", 1);
 			draw_lines(fdf);

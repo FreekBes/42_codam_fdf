@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 21:52:32 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/08 18:07:31 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/08 19:19:01 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	handle_key_presses(t_fdf *fdf)
 	int		move_dir_left_right;
 	double	zoom;
 	double	relief;
-	int		rot;
+	double	rot;
 
 	move_dir_up_down = 0;
 	move_dir_left_right = 0;
@@ -58,17 +58,17 @@ void	handle_key_presses(t_fdf *fdf)
 	if (fdf->key_stat.right)
 		move_dir_left_right -= 1 + fdf->map->tile_size * 0.2 + fdf->map->width * 0.05;
 	if (fdf->key_stat.min)
-		zoom -= 0.1;
+		zoom -= 0.05;
 	if (fdf->key_stat.plus)
-		zoom += 0.1;
+		zoom += 0.05;
 	if (fdf->key_stat.sq_br_l)
 		relief -= 0.01;
 	if (fdf->key_stat.sq_br_r)
 		relief += 0.01;
 	if (fdf->key_stat.comma)
-		rot += 1;
+		rot += 0.01;
 	if (fdf->key_stat.dot)
-		rot -= 1;
+		rot -= 0.01;
 	fdf->mlx->offset.y += move_dir_left_right;
 	fdf->mlx->offset.x += move_dir_up_down;
 	fdf->map->tile_size *= zoom;
@@ -77,9 +77,9 @@ void	handle_key_presses(t_fdf *fdf)
 		fdf->map->tile_size = 1;
 	fdf->map->relief_factor += relief;
 	if (fdf->mlx->rotation < 0)
-		fdf->mlx->rotation = 360;
-	else if (fdf->mlx->rotation > 360)
 		fdf->mlx->rotation = 0;
+	else if (fdf->mlx->rotation > fdf->mlx->max_rotation)
+		fdf->mlx->rotation = fdf->mlx->max_rotation;
 }
 
 /**
