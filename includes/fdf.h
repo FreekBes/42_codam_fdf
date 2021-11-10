@@ -6,13 +6,14 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 16:26:00 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/08 19:17:58 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/10 17:59:07 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
+# define U_INT unsigned int
 # define DEFAULT_COLOR 0x00FFFFFF
 # define DEFAULT_TILE_SIZE_FACTOR 30
 # define DEFAULT_RELIEF_FACTOR 0.5
@@ -87,7 +88,7 @@ typedef struct s_map
 	unsigned int	default_color;
 	double			tile_size;
 	double			relief_factor;
-	int				**map;
+	int				**alts;
 	t_coords		**iso_map;
 	unsigned int	**colors;
 	int				width;
@@ -130,6 +131,8 @@ void				setup_window(t_fdf *fdf, char *win_title);
 int					draw_next_frame(t_fdf *fdf);
 int					extension_valid(char *file_name, char *ext);
 void				print_map(t_map *map);
+int					check_if_recalc_needed(t_fdf *fdf);
+int					check_if_redraw_needed(t_fdf *fdf);
 int					render_next_frame(t_fdf *fdf, int forced);
 unsigned int		parse_hex(const char *s);
 unsigned int		get_gradient_color(unsigned int color_s,
@@ -137,7 +140,6 @@ unsigned int		get_gradient_color(unsigned int color_s,
 int					is_off_screen(t_mlx_ctx *mlx, t_coords coords);
 void				clear_img(t_mlx_ctx *mlx);
 void				put_pixel(t_mlx_ctx *mlx, int h, int w, unsigned int c);
-void				put_pixel_e(t_mlx_ctx *mlx, int h, int w, unsigned int c);
 void				draw_line(t_mlx_ctx *mlx, t_coords start, t_coords *end,
 						unsigned int c);
 void				draw_line_g(t_mlx_ctx *mlx, t_coords start, t_coords *end,

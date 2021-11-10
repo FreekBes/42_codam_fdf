@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 19:02:16 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/08 18:40:13 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/10 15:37:27 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,64 @@ static int	get_split_size(char **values)
 }
 
 /**
+ * Allocate size for all the map values (no need to free here, they are freed
+ * on error by the free_map method)
+ * @param map	The map struct
+ * @param conf	The config file, line by line, split by ft_split
+ * @return		Returns 1 on success, 0 on error (remember to call free_map)
+ */
+static int	allocate_map(t_map *map, char **conf)
+{
+	map->height = get_split_size(conf);
+	map->alts = (int **)ft_calloc(map->height + 1, sizeof(int *));
+	if (!map->alts)
+		return (0);
+	map->colors = (U_INT **)ft_calloc(map->height + 1, sizeof(U_INT *));
+	if (!map->colors)
+		return (0);
+	map->iso_map = (t_coords **)ft_calloc(map->height + 1, sizeof(t_coords *));
+	if (!map->iso_map)
+		return (0);
+	return (1);
+}
+
+/**
+ * Parse the values from a line of the map
+ * @param map		The map struct
+ * @param i			The current line in the map
+ * @param values	The values to parse, split by ft_split
+ * @return			Returns 0 on success, < 0 on error
+ */
+static int	parse_values(t_map *map, int i, char **values)
+{
+	char		*color_start;
+	int			j;
+
+	if (map->width == 0)
+		map->width = get_split_size(values);
+	else if (get_split_size(values) != map->width)
+	{
+		ft_free_double_ptr((void **)values);
+		return (-2);
+	}
+	map->alts[i] = (int *)ft_calloc(map->width + 1, sizeof(int));
+	map->colors[i] = (U_INT *)ft_calloc(map->width + 1, sizeof(U_INT));
+	map->iso_map[i] = (t_coords *)ft_calloc(map->width + 1, sizeof(t_coords));
+	if (!map->alts[i] || !map->colors[i] || !map->iso_map[i])
+		return (-3);
+	j = 0;
+	while (values[j] && j < map->width)
+	{
+		map->alts[i][j] = ft_atoi(values[j]);
+		color_start = ft_strchr(values[j], ',');
+		if (color_start)
+			map->colors[i][j] = parse_hex(color_start + 1);
+		j++;
+	}
+	return (0);
+}
+
+/**
  * Parse a configuration into a map structure
  * @param map	The map structure
  * @param conf	A configuration file, line by line split using ft_split
@@ -36,55 +94,29 @@ static int	get_split_size(char **values)
  */
 int	conf_to_map(t_map *map, char **conf)
 {
+	char		**values;
 	int			err;
 	int			i;
-	int			j;
-	char		**values;
-	char		*color_start;
 
-	if (!conf)
+	if (!conf || !allocate_map(map, conf))
 		return (-1);
-	ft_putendl_fd("Parsing config...", 1);
 	err = 0;
 	i = 0;
-	map->height = get_split_size(conf);
-	map->map = (int **)ft_calloc(map->height + 1, sizeof(int *));
-	map->colors = (unsigned int **)ft_calloc(map->height + 1, sizeof(unsigned int *));
-	map->iso_map = (t_coords **)ft_calloc(map->height + 1, sizeof(t_coords *));
 	while (conf[i] && err >= 0)
 	{
 		if (ft_strlen(conf[i]) > 0)
 		{
 			values = ft_split(conf[i], ' ');
-			if (!values)
+			if (values)
+				err = parse_values(map, i, values);
+			else
 				err = -1;
-			if (map->width == 0)
-				map->width = get_split_size(values);
-			else if (get_split_size(values) != map->width)
-			{
-				err = -2;
-				ft_free_double_ptr((void **)values);
-				break ;
-			}
-			map->map[i] = (int *)ft_calloc(map->width + 1, sizeof(int));
-			map->colors[i] = (unsigned int *)ft_calloc(map->width + 1, sizeof(unsigned int));
-			map->iso_map[i] = (t_coords *)ft_calloc(map->width + 1, sizeof(t_coords));
-			j = 0;
-			while (values[j] && j < map->width)
-			{
-				map->map[i][j] = ft_atoi(values[j]);
-				color_start = ft_strchr(values[j], ',');
-				if (color_start)
-					map->colors[i][j] = parse_hex(color_start + 1);
-				j++;
-			}
 			ft_free_double_ptr((void **)values);
 		}
 		else
-			err = -3;
+			err = -4;
 		i++;
 	}
 	ft_free_double_ptr((void **)conf);
-	//print_map(map);
 	return (err);
 }

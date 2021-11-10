@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 19:34:21 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/08 19:25:44 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/10 15:21:39 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	print_map(t_map *map)
 		j = 0;
 		while (j < map->width)
 		{
-			ft_putnbr_fd(map->map[i][j], 1);
+			ft_putnbr_fd(map->alts[i][j], 1);
 			ft_putstr_fd(" (", 1);
 			ft_putnbr_base_fd(map->colors[i][j], "0123456789ABCDEF", 1);
 			ft_putstr_fd(") ", 1);

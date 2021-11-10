@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 18:54:45 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/06 22:19:55 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/10 16:37:55 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,29 @@
 #include "fdf.h"
 
 /**
+ * Initialize contents pointer
+ * @param buff_size		A pointer to the size of the buffer
+ * @param contents_size	A pointer to store the size of the contents
+ * @param contents_len	A pointer to store the len of the contents
+ * @return				Returns 1 on success, 0 on error
+ */
+static int	init_contents(size_t *buff_size, size_t *contents_size,
+				size_t *contents_len, char **contents)
+{
+	*contents_size = *buff_size + 1;
+	*contents_len = 0;
+	*contents = ft_calloc(*contents_size, sizeof(char));
+	if (!*contents)
+		return (0);
+	return (1);
+}
+
+/**
  * Append a buffer to the string
  * @param contents	The end string
  * @param buff		The buffer to add
  * @param buff_size	The size of the buffer
- * @return			A pointer to contents
+ * @return			A pointer to contents, or NULL on error
  */
 static char	*append_buffer(char *contents, char *buff, size_t buff_size)
 {
@@ -28,12 +46,9 @@ static char	*append_buffer(char *contents, char *buff, size_t buff_size)
 	static size_t	contents_len;
 	char			*temp;
 
-	if (!contents)
-	{
-		contents_size = buff_size + 1;
-		contents = ft_calloc(contents_size, sizeof(char));
-		contents_len = 0;
-	}
+	if (!contents
+		&& !init_contents(&buff_size, &contents_size, &contents_len, &contents))
+		return (NULL);
 	else
 	{
 		if (contents_len + buff_size >= contents_size)
@@ -127,7 +142,10 @@ int	parse_conf(t_map *map, char *conf_file)
 		return (err);
 	read_res = read_conf(fd, &buffer, &contents, &err);
 	if (read_res == 0)
+	{
+		ft_putendl_fd("Parsing config...", 1);
 		err = conf_to_map(map, ft_split(contents, '\n'));
+	}
 	else if (read_res < 0)
 		err = -33;
 	ft_free(contents);

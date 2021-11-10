@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 16:43:17 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/08 17:30:23 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/10 15:29:02 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ t_map	*init_map(void)
 	map = (t_map *)malloc(sizeof(t_map));
 	if (!map)
 		return (NULL);
-	map->map = NULL;
+	map->alts = NULL;
+	map->iso_map = NULL;
 	map->colors = NULL;
 	map->default_color = DEFAULT_COLOR;
 	map->tile_size = RES_HEIGHT / DEFAULT_TILE_SIZE_FACTOR;
@@ -44,8 +45,11 @@ t_map	*init_map(void)
  */
 void	*free_map(t_map *map)
 {
-	ft_free_double_ptr((void **)map->map);
-	ft_free_double_ptr((void **)map->colors);
-	ft_free(map);
-	return (NULL);
+	if (map->alts)
+		ft_free_double_ptr((void **)map->alts);
+	if (map->colors)
+		ft_free_double_ptr((void **)map->colors);
+	if (map->iso_map)
+		ft_free_double_ptr((void **)map->iso_map);
+	return (ft_free(map));
 }
