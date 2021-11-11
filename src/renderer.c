@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 20:25:52 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/11 18:41:02 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/11 18:55:47 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ static void	calculate_iso_coordinates(t_fdf *fdf)
 	int			w;
 	t_zcoords	coords;
 
-	ft_putendl_fd("Calculating isographic coordinates...", 1);
 	h = 0;
 	while (h < fdf->map->height)
 	{
@@ -110,7 +109,6 @@ static void	render_points(t_fdf *fdf)
 	int			h;
 	int			w;
 
-	ft_putendl_fd("Drawing pixels for coordinates...", 1);
 	h = 0;
 	while (h < fdf->map->height)
 	{
@@ -148,14 +146,10 @@ int	render_next_frame(t_fdf *fdf, int forced)
 	}
 	if (forced || changed || check_if_redraw_needed(fdf))
 	{
-		ft_putendl_fd("Clearing image...", 1);
 		clear_img(fdf->mlx);
 		render_points(fdf);
 		if (ALWAYS_DRAW_LINES || no_keys_pressed(&fdf->key_stat))
-		{
-			ft_putendl_fd("Drawing lines...", 1);
 			draw_lines(fdf);
-		}
 		changed = 1;
 	}
 	return (changed);

@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 18:54:45 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/11 18:40:22 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/11 18:58:47 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,5 +152,6 @@ int	parse_conf(t_map *map, char *conf_file)
 	ft_free(contents);
 	ft_free(buffer);
 	close(fd);
+	ft_putendl_fd("Config parsed. Starting FdF now!", 1);
 	return (err);
 }
