@@ -1,6 +1,10 @@
 fdf
 *.DS_Store
+
+# MLX library
 *.dylib
+*.swiftdoc
+*.swiftmodule
 
 # Prerequisites
 *.d
