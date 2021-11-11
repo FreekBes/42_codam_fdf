@@ -6,14 +6,13 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/10 16:45:26 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/10 16:46:43 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/11 18:43:40 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 #include "fdf.h"
-
-// TODO TODO RESET_KEY_PRESSES NEEDS TO BE CALLED TODO TODO
+#include "fdf_drawer.h"
 
 /**
  * Reset the pressed keys

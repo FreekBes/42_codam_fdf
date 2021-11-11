@@ -6,13 +6,14 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 18:50:45 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/10 17:40:51 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/11 18:39:59 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "mlx.h"
 #include "fdf.h"
+#include "fdf_drawer.h"
 
 /**
  * Check if a coordinate is off-screen
@@ -23,9 +24,9 @@ int	is_off_screen(t_mlx_ctx *mlx, t_coords coords)
 {
 	coords.x += mlx->offset.x;
 	coords.y += mlx->offset.y;
-	if (coords.x < 0 || coords.x >= mlx->res_h)
+	if (coords.x < 0 || coords.x >= (int)mlx->res_h)
 		return (1);
-	else if (coords.y < 0 || coords.y >= mlx->res_w)
+	else if (coords.y < 0 || coords.y >= (int)mlx->res_w)
 		return (1);
 	return (0);
 }
@@ -43,7 +44,7 @@ static char	*get_pixel_addr(t_mlx_ctx *mlx, int h, int w)
 
 	h += mlx->offset.x;
 	w += mlx->offset.y;
-	if (h >= mlx->res_h || w >= mlx->res_w || h < 0 || w < 0)
+	if (h >= (int)mlx->res_h || w >= (int)mlx->res_w || h < 0 || w < 0)
 		return (NULL);
 	dst = mlx->img.address + h * mlx->img.line_size
 		+ w * (mlx->img.bits_per_pixel / 8);

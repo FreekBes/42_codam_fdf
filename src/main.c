@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 16:24:41 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/06 22:38:40 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/11 18:38:23 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "mlx.h"
 #include "libft.h"
 #include "fdf.h"
+#include "fdf_parser.h"
 
 /**
  * Print an error to stderr

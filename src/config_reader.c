@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 18:54:45 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/10 16:37:55 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/11 18:40:22 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <fcntl.h>
 #include "libft.h"
 #include "fdf.h"
+#include "fdf_parser.h"
 
 /**
  * Initialize contents pointer

@@ -6,13 +6,14 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/10 17:09:50 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/10 18:02:24 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/11 18:40:34 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "libft.h"
 #include "fdf.h"
+#include "fdf_drawer.h"
 
 /**
  * Initialize the drawing of a line for Bresenham's Line Algorithm

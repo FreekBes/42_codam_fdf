@@ -6,14 +6,15 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/29 20:24:02 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/08 19:25:37 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/11 18:45:04 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 #include "libft.h"
-#include "fdf.h"
 #include "mlx.h"
+#include "fdf.h"
+#include "fdf_settings.h"
 
 /**
  * Create an mlx image instance in an mlx context struct
@@ -27,9 +28,8 @@ static void	create_img(t_mlx_ctx *ctx)
 }
 
 /**
- * Reduce the window size if it's too big
+ * Reduce the window and canvas size if it's too big
  * @param ctx	A pointer to an mlx context struct
- * @todo
  */
 static void	catch_max_res_exception(t_mlx_ctx *ctx)
 {
@@ -71,6 +71,7 @@ int	init_mlx_context(t_fdf *fdf)
 		return (-1);
 	fdf->mlx->res_w = RES_WIDTH;
 	fdf->mlx->res_h = RES_HEIGHT;
+	catch_max_res_exception(fdf->mlx);
 	fdf->mlx->win = NULL;
 	fdf->mlx->img.img_ptr = NULL;
 	fdf->mlx->offset.x = RES_HEIGHT * 0.4;
@@ -94,8 +95,6 @@ int	init_mlx_context(t_fdf *fdf)
  */
 int	create_win(t_fdf *fdf, char *win_title)
 {
-	// TODO: make sure the max res is also used where RES_WIDTH and stuff is used
-	catch_max_res_exception(fdf->mlx);
 	fdf->mlx->win = mlx_new_window(fdf->mlx->core,
 			fdf->mlx->res_w, fdf->mlx->res_h, win_title);
 	if (!fdf->mlx->win)

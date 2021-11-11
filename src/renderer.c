@@ -6,7 +6,7 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 20:25:52 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/10 18:00:46 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/11 18:41:02 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include "libft.h"
 #include "mlx.h"
 #include "fdf.h"
+#include "fdf_settings.h"
+#include "fdf_drawer.h"
 
 /**
  * Draw a line from map point to another map point
@@ -137,8 +139,6 @@ static void	render_points(t_fdf *fdf)
 int	render_next_frame(t_fdf *fdf, int forced)
 {
 	int				changed;
-	int				h;
-	int				w;
 
 	changed = 0;
 	if (forced || check_if_recalc_needed(fdf))

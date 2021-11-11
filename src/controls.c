@@ -6,11 +6,12 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 21:52:32 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/10 16:48:33 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/11 18:37:43 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "fdf_settings.h"
 
 /**
  * Handle offset (arrow keys)

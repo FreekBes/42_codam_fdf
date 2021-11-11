@@ -6,25 +6,29 @@
 #    By: fbes <fbes@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/04/21 20:02:11 by fbes          #+#    #+#                  #
-#    Updated: 2021/11/10 18:02:10 by fbes          ########   odam.nl          #
+#    Updated: 2021/11/11 18:48:21 by fbes          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =		fdf
 
-SRCS =		main.c map.c window.c setup.c drawer.c debug.c colors.c \
-			config_reader.c config_checker.c config_parser.c \
-			convert.c bresenham.c renderer.c renderer_checks.c keys.c controls.c
+SRCS =		src/main.c src/map.c src/window.c src/setup.c src/drawer.c \
+			src/debug.c src/colors.c src/config_reader.c src/config_checker.c \
+			src/config_parser.c src/convert.c src/bresenham.c src/renderer.c \
+			src/renderer_checks.c src/keys.c src/controls.c
+
+HEADERS =	includes/fdf.h includes/fdf_drawer.h includes/fdf_parser.h \
+			includes/fdf_settings.h includes/fdf_structs.h
 
 INCLUDES =	-I lib/libft -I includes -I lib/mlx
 
 OBJS =		$(SRCS:.c=.o)
 
-CFLAGS =	-fsanitize=address
+CFLAGS =	-Wall -Werror -Wextra
 
 all: $(NAME)
 
-$(NAME): $(OBJS) includes/fdf.h lib/libft/libft.a libmlx.dylib
+$(NAME): $(OBJS) $(HEADERS) lib/libft/libft.a libmlx.dylib
 	$(CC) $(CFLAGS) $(INCLUDES) $(SRCS) \
 	lib/libft/libft.a libmlx.dylib -o $(NAME)
 

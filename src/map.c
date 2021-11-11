@@ -6,13 +6,14 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 16:43:17 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/10 15:29:02 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/11 18:49:59 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 #include "libft.h"
 #include "fdf.h"
+#include "fdf_settings.h"
 
 /**
  * Allocate and initialize a map structure
@@ -29,7 +30,7 @@ t_map	*init_map(void)
 	map->iso_map = NULL;
 	map->colors = NULL;
 	map->default_color = DEFAULT_COLOR;
-	map->tile_size = RES_HEIGHT / DEFAULT_TILE_SIZE_FACTOR;
+	map->tile_size = 10;
 	if (map->tile_size <= 0)
 		return (ft_free(map));
 	map->relief_factor = DEFAULT_RELIEF_FACTOR;

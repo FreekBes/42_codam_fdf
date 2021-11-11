@@ -6,12 +6,13 @@
 /*   By: fbes <fbes@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/05 19:34:21 by fbes          #+#    #+#                 */
-/*   Updated: 2021/11/10 15:21:39 by fbes          ########   odam.nl         */
+/*   Updated: 2021/11/11 18:37:07 by fbes          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "fdf.h"
+#include "fdf_settings.h"
 
 /**
  * Print a map configuration for debugging purposes
