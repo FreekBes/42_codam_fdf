@@ -6,7 +6,7 @@
 #    By: fbes <fbes@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/04/21 20:02:11 by fbes          #+#    #+#                  #
-#    Updated: 2021/11/11 18:48:21 by fbes          ########   odam.nl          #
+#    Updated: 2021/11/11 18:54:47 by fbes          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,6 @@ bonus: all
 clean:
 	rm -f $(OBJS)
 	make -C lib/libft clean
-	make -C lib/mlx clean
 
 fclean:
 	rm -f $(OBJS) $(NAME)
