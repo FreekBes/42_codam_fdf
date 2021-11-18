@@ -79,7 +79,8 @@ static int	win_focus(t_fdf *fdf)
  */
 void	setup_window(t_fdf *fdf, char *win_title)
 {
-	create_win(fdf, win_title);
+	if (create_win(fdf, win_title) < 0)
+		exit_fdf(fdf, EXIT_FAILURE, "Could not open a window", NULL);
 	mlx_hook(fdf->mlx->win, 17, 1L << 17, &exit_hook, fdf);
 	mlx_hook(fdf->mlx->win, 2, 1L << 0, &keypress, fdf);
 	mlx_hook(fdf->mlx->win, 3, 1L << 1, &keyrelease, fdf);
