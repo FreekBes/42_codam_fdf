@@ -3,8 +3,11 @@ fdf
 
 # MLX library
 *.dylib
-*.swiftdoc
-*.swiftmodule
+lib/mlx/*.swiftdoc
+lib/mlx/*.swiftmodule
+lib/mlx/*.json
+lib/mlx/*.swiftsourceinfo
+lib/mlx/*.tmp
 
 # Prerequisites
 *.d
